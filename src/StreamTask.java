@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,12 +12,10 @@ public class StreamTask {
         System.out.println(IntStream.of(array).average().getAsDouble());
 
         IntStream.range(0, array.length)
-                .mapToObj(i->i)
+                .boxed()
                 .collect(Collectors.toMap(i->i, i->array[i]))
-                .entrySet()
-                .stream()
-                .min(Comparator.comparingInt(Map.Entry::getValue))
-                .stream()
+                .entrySet().stream()
+                .min(Comparator.comparingInt(Map.Entry::getValue)).stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
                 .forEach((k,v)-> System.out.println(v + "["+ k + "]"));
 
