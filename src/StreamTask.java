@@ -1,7 +1,3 @@
-import java.lang.reflect.Array;
-import java.net.CookieManager;
-import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -21,8 +17,6 @@ public class StreamTask {
         System.out.println(IntStream.of(array).filter(p -> p == 0).count());
 
         IntStream.of(array).map(x -> x * number).forEach(x -> System.out.print(x + " "));
-
-
 
     }
 }
