@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.net.CookieManager;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,12 +13,8 @@ public class StreamTask {
         System.out.println(IntStream.of(array).average().getAsDouble());
 
         IntStream.range(0, array.length)
-                .boxed()
-                .collect(Collectors.toMap(i->i, i->array[i]))
-                .entrySet().stream()
-                .min(Comparator.comparingInt(Map.Entry::getValue)).stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-                .forEach((k,v)-> System.out.println(v + "["+ k + "]"));
+                .reduce((a, b) -> array[a] > array[b] ? b : a)
+                .ifPresent(x -> System.out.println(array[x] + "[" + x + "]"));
 
         System.out.println(IntStream.of(array).filter(p -> p > 0).count());
 
